@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festive Wear - MAKHMAL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f5f2;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            background-color: rgba(248, 245, 242, 0.95);
+        }
+
+        header.scrolled {
+            background-color: rgba(248, 245, 242, 0.98);
+            padding: 15px 0;
+            border-bottom: 1px solid #e8e5e2;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #8c6d46;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-icons i {
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .nav-icons i:hover {
+            color: #8c6d46;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 150px 0 80px;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('festive-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #e8e5e2;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 1px;
+            background-color: #8c6d46;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            transition: transform 0.3s ease;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #8c6d46;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            z-index: 2;
+            border-radius: 3px;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-info p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            font-weight: 500;
+            font-size: 16px;
+            color: #8c6d46;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            padding: 80px 0 20px;
+            color: #ccc;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background-color: #8c6d46;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+
+        .footer-column ul li a:hover {
+            color: #8c6d46;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin: 20px 0;
+            }
+            
+            .page-header {
+                padding: 120px 0 60px;
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header h1 {
+                font-size: 28px;
+            }
+            
+            .section-title h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">MAKHMAL</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#new">New</a></li>
+                    <li><a href="index.html#men">Men</a></li>
+                    <li><a href="index.html#women">Women</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-shopping-bag"></i>
+                    <i class="fas fa-user"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Festive Collection</h2>
+            </div>
+
+            <!-- Row 1 -->
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="festie1.jpg" alt="Embroidered Anarkali">
+                        <div class="product-badge">Festive</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Embroidered Anarkali</h3>
+                        <p>Colorful with intricate thread work</p>
+                        <div class="product-price">Rs.18,500.00</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="festie2.jpg" alt="Designer Lehenga">
+                        <div class="product-badge">Premium</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Designer Lehenga</h3>
+                        <p>Heavy embroidery with mirror work</p>
+                        <div class="product-price">Rs.25,000.00</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="festie9.webp" alt="Party Wear Gown">
+                        <div class="product-badge">Elegant</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Party Wear Gown</h3>
+                        <p>Floor-length with sequin detailing</p>
+                        <div class="product-price">Rs.22,800.00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="festie4.webp" alt="Traditional Saree">
+                        <div class="product-badge">Traditional</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Traditional Silk Saree</h3>
+                        <p>Rich colors with zari border</p>
+                        <div class="product-price">Rs.15,200.00</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="festie6.webp" alt="Sharara Set">
+                        <div class="product-badge">Modern</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Contemporary Sharara</h3>
+                        <p>Modern cuts with traditional motifs</p>
+                        <div class="product-price">Rs.19,500.00</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="festie5.webp" alt="Kurta Set">
+                        <div class="product-badge">Casual</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Embroidered Kurta Set</h3>
+                        <p>Perfect for festive gatherings</p>
+                        <div class="product-price">Rs.12,800.00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="festie9.webp" alt="Gharara Set">
+                        <div class="product-badge">Classic</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Traditional Gharara</h3>
+                        <p>Vintage style with modern comfort</p>
+                        <div class="product-price">Rs.21,000.00</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="festie10.webp" alt="Cape Gown">
+                        <div class="product-badge">Trendy</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cape Style Gown</h3>
+                        <p>Contemporary design with drama</p>
+                        <div class="product-price">Rs.28,500.00</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="festie2.jpg" alt="Palazzo Set">
+                        <div class="product-badge">Comfort</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Palazzo Suit Set</h3>
+                        <p>Comfortable yet stylish festive wear</p>
+                        <div class="product-price">Rs.16,500.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Craftsmanship</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Care Instructions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Join Us</h3>
+                    <ul>
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Location</h3>
+                    <ul>
+                        <li><a href="#">Pakistan (PKR Rs)</a></li>
+                        <li><a href="#">International Shipping</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>Copyright © 2025, MAKHMAL. All rights reserved. See our terms of use and privacy notice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Product hover effect enhancement
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

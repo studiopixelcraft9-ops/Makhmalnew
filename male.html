@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Collection - MAKHMAL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f5f2;
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            background-color: rgba(248, 245, 242, 0.95);
+        }
+
+        header.scrolled {
+            background-color: rgba(248, 245, 242, 0.98);
+            padding: 15px 0;
+            border-bottom: 1px solid #e8e5e2;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #8c6d46;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-icons i {
+            margin-left: 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .nav-icons i:hover {
+            color: #8c6d46;
+        }
+
+        /* Product Detail Section */
+        .product-detail {
+            padding: 150px 0 80px;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .product-gallery {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 20px;
+        }
+
+        .thumbnail-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 1px solid #e8e5e2;
+            transition: all 0.3s ease;
+        }
+
+        .thumbnail.active {
+            border-color: #8c6d46;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px 0;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 500;
+            color: #8c6d46;
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .size-selection {
+            margin-bottom: 30px;
+        }
+
+        .size-title {
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            padding: 10px 20px;
+            border: 1px solid #e8e5e2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .size-option.active {
+            border-color: #8c6d46;
+            background-color: #8c6d46;
+            color: white;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #e8e5e2;
+            background: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background-color: #f8f5f2;
+        }
+
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            border: 1px solid #e8e5e2;
+            font-size: 16px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: #8c6d46;
+            color: white;
+            flex: 2;
+        }
+
+        .btn-primary:hover {
+            background-color: #7a5f3a;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #1a1a1a;
+            border: 1px solid #1a1a1a;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        .product-meta {
+            border-top: 1px solid #e8e5e2;
+            padding-top: 20px;
+        }
+
+        .meta-item {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        /* Related Products */
+        .related-products {
+            padding: 80px 0;
+            background-color: #f8f5f2;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 1px;
+            background-color: #8c6d46;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 600px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #8c6d46;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .product-info-card {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-info-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .product-price-card {
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            padding: 80px 0 20px;
+            color: #ccc;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background-color: #8c6d46;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+
+        .footer-column ul li a:hover {
+            color: #8c6d46;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Cart Notification */
+        .cart-notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background-color: #8c6d46;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            z-index: 1001;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+
+        .cart-notification.show {
+            transform: translateX(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .product-gallery {
+                grid-template-columns: 80px 1fr;
+            }
+            
+            .thumbnail {
+                width: 80px;
+                height: 90px;
+            }
+            
+            .main-image {
+                height: 600px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin: 20px 0;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .thumbnail-list {
+                flex-direction: row;
+                order: 2;
+            }
+            
+            .main-image {
+                height: 400px;
+            }
+            
+            .section-title h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">MAKHMAL</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#new">New</a></li>
+                    <li><a href="male.html" class="active">Men</a></li>
+                    <li><a href="female.html">Women</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-shopping-bag" id="cart-icon"></i>
+                    <i class="fas fa-user"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cart Notification -->
+    <div class="cart-notification" id="cartNotification">
+        Item added to cart successfully!
+    </div>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail">
+        <div class="container">
+            <div class="product-container">
+                <div class="product-gallery">
+                    <div class="thumbnail-list">
+                        <img src="male1.webp" alt="Thumbnail 1" class="thumbnail active">
+                        <img src="male2.webp" alt="Thumbnail 2" class="thumbnail">
+                        <img src="male3.webp" alt="Thumbnail 3" class="thumbnail">
+                        <img src="male6.webp" alt="Thumbnail 4" class="thumbnail">
+                    </div>
+                    <div class="main-gallery">
+                        <img src="male1.webp" alt="Premium Cotton Shirt" class="main-image" id="mainImage">
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <h1 class="product-title">Premium Cotton Shirt</h1>
+                    <div class="product-price">Rs.8,500.00</div>
+                    <p class="product-description">
+                        Crafted from premium cotton fabric, this elegant shirt combines traditional Pakistani craftsmanship with contemporary design. Features a tailored fit and sophisticated styling for the modern gentleman.
+                    </p>
+                    
+                    <div class="size-selection">
+                        <div class="size-title">Select Size</div>
+                        <div class="size-options">
+                            <div class="size-option active">S</div>
+                            <div class="size-option">M</div>
+                            <div class="size-option">L</div>
+                            <div class="size-option">XL</div>
+                            <div class="size-option">XXL</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <span class="quantity-title">Quantity:</span>
+                        <button class="quantity-btn" id="decreaseQty">-</button>
+                        <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
+                        <button class="quantity-btn" id="increaseQty">+</button>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="addToCart">Add to Cart</button>
+                        <button class="btn btn-secondary">Add to Wishlist</button>
+                    </div>
+                    
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <strong>Material:</strong> 100% Premium Cotton
+                        </div>
+                        <div class="meta-item">
+                            <strong>Care:</strong> Machine wash cold
+                        </div>
+                        <div class="meta-item">
+                            <strong>Delivery:</strong> Free shipping on orders over Rs. 5,000
+                        </div>
+                        <div class="meta-item">
+                            <strong>Returns:</strong> 30-day return policy
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products">
+        <div class="container">
+            <div class="section-title">
+                <h2>You May Also Like</h2>
+            </div>
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="male7.webp" alt="Designer Kurta">
+                        <div class="product-badge">New</div>
+                    </div>
+                    <div class="product-info-card">
+                        <h3>Designer Kurta</h3>
+                        <p>Handcrafted traditional wear</p>
+                        <div class="product-price-card">Rs.7,200.00</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="male8.webp" alt="Formal Shirt">
+                        <div class="product-badge">Best Seller</div>
+                    </div>
+                    <div class="product-info-card">
+                        <h3>Formal Shirt</h3>
+                        <p>Elegant office wear</p>
+                        <div class="product-price-card">Rs.6,800.00</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="male2.webp" alt="Casual Wear">
+                        <div class="product-badge">Limited</div>
+                    </div>
+                    <div class="product-info-card">
+                        <h3>Casual Wear</h3>
+                        <p>Comfortable everyday shirt</p>
+                        <div class="product-price-card">Rs.5,500.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Craftsmanship</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Care Instructions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Join Us</h3>
+                    <ul>
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Location</h3>
+                    <ul>
+                        <li><a href="#">Pakistan (PKR Rs)</a></li>
+                        <li><a href="#">International Shipping</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>Copyright © 2025, MAKHMAL. All rights reserved. See our terms of use and privacy notice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Image gallery functionality
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const mainImage = document.getElementById('mainImage');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                // Update main image
+                mainImage.src = this.src;
+                
+                // Update active thumbnail
+                thumbnails.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Size selection
+        const sizeOptions = document.querySelectorAll('.size-option');
+        sizeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                sizeOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Quantity selector
+        const quantityInput = document.getElementById('quantity');
+        const decreaseBtn = document.getElementById('decreaseQty');
+        const increaseBtn = document.getElementById('increaseQty');
+
+        decreaseBtn.addEventListener('click', function() {
+            if (quantityInput.value > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        });
+
+        increaseBtn.addEventListener('click', function() {
+            if (quantityInput.value < 10) {
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+            }
+        });
+
+        // Add to cart functionality
+        const addToCartBtn = document.getElementById('addToCart');
+        const cartNotification = document.getElementById('cartNotification');
+
+        addToCartBtn.addEventListener('click', function() {
+            // Show notification
+            cartNotification.classList.add('show');
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                cartNotification.classList.remove('show');
+            }, 3000);
+            
+            // Here you would typically add the item to a cart array or send to backend
+            const product = {
+                name: 'Premium Cotton Shirt',
+                price: 8500,
+                size: document.querySelector('.size-option.active').textContent,
+                quantity: parseInt(quantityInput.value),
+                image: 'male1.jpg'
+            };
+            
+            console.log('Added to cart:', product);
+            // In a real application, you would save this to localStorage or send to server
+        });
+
+        // Product hover effect enhancement
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
